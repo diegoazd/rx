@@ -12,11 +12,9 @@ public class Reactive {
             processes++;
             new SlowTasks().process();
             return "Done";
-        })
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.single())
-                .subscribe(this::incrementAfter, Throwable::printStackTrace);
-
+        }).subscribeOn(Schedulers.io())
+          .observeOn(Schedulers.single())
+          .subscribe(this::incrementAfter, Throwable::printStackTrace);
     }
 
     public void incrementAfter(String s) {
