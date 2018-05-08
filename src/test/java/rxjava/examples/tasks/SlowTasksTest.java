@@ -1,5 +1,6 @@
 package rxjava.examples.tasks;
 
+import io.reactivex.Observable;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -62,11 +63,9 @@ public class SlowTasksTest {
     }
 
     @Test
-    public void shouldRunFlowable() throws InterruptedException {
+    public void shouldRunObservable() throws InterruptedException {
         Reactive reactive = new Reactive();
-        for(int i=0; i< 20000; i++) {
-            reactive.process();
-        }
+        reactive.process();
         System.out.println("Before slow process: "+reactive.processes);
         System.out.println("Tasks processed: "+reactive.after);
         Thread.sleep(1000);
@@ -74,5 +73,16 @@ public class SlowTasksTest {
         System.out.println("Tasks processed: "+reactive.after);
     }
 
+    @Test
+    public void shouldRunFlowable() throws InterruptedException {
+        Reactive reactive = new Reactive();
+        for(int i=0; i<20000; i++)
+            reactive.process2();
 
+        System.out.println("Before slow processed: "+reactive.processes);
+        System.out.println("Tasks processed: "+reactive.after);
+        Thread.sleep(100);
+        System.out.println("Before slow processed 2: "+reactive.processes);
+        System.out.println("Tasks processed 2: "+reactive.after);
+    }
 }
